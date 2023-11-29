@@ -1,1 +1,1 @@
-index
+<!-- Phải có index.php hoặc homepage.php. Nếu không không activate được! -->
