@@ -93,7 +93,7 @@ get_header();
 
 
 <!-- Start Why Choose Us Section -->
-<div class="why-choose-section">
+<div class="why-choose-section" id="why">
 	<div class="container">
 		<div class="row justify-content-between">
 			<div class="col-lg-6">
@@ -157,7 +157,7 @@ get_header();
 <!-- End Why Choose Us Section -->
 
 <!-- Start We Help Section -->
-<div class="we-help-section">
+<div class="we-help-section" id="help">
 	<div class="container">
 		<div class="row justify-content-between">
 			<div class="col-lg-7 mb-5 mb-lg-0">
@@ -187,7 +187,7 @@ get_header();
 <!-- End We Help Section -->
 
 <!-- Start Popular Product -->
-<div class="popular-product">
+<div class="popular-product" id="sanpham">
 	<div class="container">
 		<div class="row">
 
@@ -317,7 +317,7 @@ $query = new WP_Query($args);
 // Kiểm tra xem có bài viết nào không
 if ($query->have_posts()) : ?>
 <!-- Start Blog Section -->
-<div class="blog-section">
+<div class="blog-section" id="blog">
 	<div class="container">
 		<div class="row mb-5">
 			<div class="col-md-6">
