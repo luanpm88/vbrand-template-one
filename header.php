@@ -32,8 +32,8 @@
                         <li><a class="nav-link" href="#lienhe">Liên hệ</a></li>
                     </ul> 
                     <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                        <li><a class="nav-link" href="#"><img src="images/user.svg"></a></li>
-                        <li><a class="nav-link" href="cart.html"><img src="images/cart.svg"></a></li>
+                        <li><a class="nav-link" href="#"><img src="<?=get_template_directory_uri()?>/images/user.svg"></a></li>
+                        <li><a class="nav-link" href="cart.html"><img src="<?=get_template_directory_uri()?>/images/cart.svg"></a></li>
                     </ul>
                 </div>
             </div>
