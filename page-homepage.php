@@ -28,7 +28,7 @@ get_header();
 
  
 <!-- Start Product Section -->
-<div class="product-section">
+<div class="product-section" id="sanpham">
 	<div class="container">
 		<div class="row">
 
@@ -187,7 +187,7 @@ get_header();
 <!-- End We Help Section -->
 
 <!-- Start Popular Product -->
-<div class="popular-product" id="sanpham">
+<div class="popular-product">
 	<div class="container">
 		<div class="row">
 

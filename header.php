@@ -26,7 +26,7 @@
                 <div class="collapse navbar-collapse" id="navbarsFurni">
                     <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
                         <li class="nav-item active"> <a class="nav-link" href="index.html">Trang chủ</a></li>
-                        <li><a class="nav-link" href="#about">Giới thiệu</a></li>
+                        <li><a class="nav-link" href="#why">Giới thiệu</a></li>
                         <li><a class="nav-link" href="#sanpham">Sản phẩm</a></li> 
                         <li><a class="nav-link" href="#blog">Blog</a></li>
                         <li><a class="nav-link" href="#lienhe">Liên hệ</a></li>
