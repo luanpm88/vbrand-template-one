@@ -1,6 +1,6 @@
    <!-- Start Footer Section -->
    <footer class="footer-section">
-			<div class="container relative">
+			<div class="container relative" id="lienhe">
 
 				<div class="sofa-img">
 					<img src="<?=get_template_directory_uri()?>/images/sofa.png" alt="Image" class="img-fluid">
