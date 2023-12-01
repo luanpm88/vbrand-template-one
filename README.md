@@ -12,3 +12,12 @@
    2. Activate vBrand Template One: Đăng nhập vào WordPress Admin Panel, vào menu Appearance, activate theme vBrand Template One
    3. Tạo page mới: Vào menu Pages, tạo 1 mới 1 page bất kỳ (VD: Homepage). Bên tay phải mục Template, chọn Homepage. Chọn publish.
    4. Cấu hình homepage: Vào menu Appearance => Customize => Homepage settings => HomePage => Chọn Homepage. Chọn Publish.
+   5. Mở trang chính của WordPress site sẽ thấy theme đẹp full nội dung...
+
+# vBrand connect to Theme for content management
+   1. Trong WordPress admin panel. Chọn menu vBrand Connect. Copy API endpoint của WP tại section OUT
+   2. Đăng nhập vào admin view của vBrand Admin (nhánh brand, cờ APP_BRAND=true). Vào Customer --> Customers. Chọn edit customer tương ứng với WordPress site. Vào tab WordPress Connect
+   3. Dán API enpoint ở bước 1 vào phần WordPress conntect. Nhấn lưu.
+   4. Customer tương ứng sau khi đăng nhập, thấy website menu của mình gồm:
+      - Giao diện: danh sách, mua theme, activate theme.
+      - Cấu hình nội dung: edit toàn bộ nội dung trên WP theme tại đây (site logo, banner text, woo mudle settings,...)
