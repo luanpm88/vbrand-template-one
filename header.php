@@ -13,12 +13,24 @@
     <title>Woo vBrand</title>
   </head>
   <body>
-     
+
+<?php
+$response = vbrandsync_getResponse('/');
+
+?>
+    
 		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
 
             <div class="container">
-                <a class="navbar-brand" href="index.html">Furni<span>.</span></a>
+                <a class="navbar-brand" href="<?php echo home_url('/')?>">
 
+                    <?php if (\App\Models\Setting::getThemeOption('site_logo') ){ ?>
+                        <img src="<?php echo \App\Models\Setting::getThemeOption('site_logo') ; ?>" />
+                    <?php } else { ?>
+                        Furni<span>.</span>
+                    <?php } ?>
+                    
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

@@ -10,7 +10,14 @@ get_header();
 		<div class="row justify-content-between">
             <div class="col-lg-5">
                 <div class="intro-excerpt">
-                    <h1>Modern Interior <span clsas="d-block">Design Studio</span></h1>
+                    <h1>
+                        <?php echo \App\Models\Setting::getThemeOption('banner_title', 'Modern Interior <span clsas="d-block">Design Studio</span>');?>
+                    <?php  
+                   // $response = vbrandsync_getResponse('/'); 
+
+                    //echo \App\Models\Setting::getThemeOption('banner_title', 'hahaha');
+                    ?>
+                    </h1>
                     <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
                     <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
                 </div>
@@ -34,27 +41,72 @@ get_header();
 
 			<!-- Start Column 1 -->
 			<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-				<h2 class="mb-4 section-title">SẢN PHẨM MỚI</h2>
+                <h2 class="mb-4 section-title">
+                    <?php echo \App\Models\Setting::getThemeOption('product_title', 'SẢN PHẨM MỚI');?>
+				</h2>
 				<p class="mb-4">
-					Những mâu sản phẩm luôn đem lại cho bạn những cảm hứng tuyệt vời, sáng tạo trong cuộc sống.
-				 </p>
-				 <p class="mb-4">
-					Rất nhiều mẫu ghế nội thất phù hợp với bạn đang sẵn sàng chơ bạn ghé coi	
-				</p>
-				<p class="mb-4">
-					Hân hạnh trào đón bạn
-				</P>
-				<p>
-					<a href="shop.html" class="btn btn-primary">Khám phá thêm</a>
-				</p>
+                    <?php echo \App\Models\Setting::getThemeOption('product_description', 'Mẫu sản phẩm mới nhất được chúng tôi cập nhật hàngg ngày');?>	
+				</p>  
 			</div> 
 			<!-- End Column 1 -->
+            
+            <?php
+                $args = array(
+                    'post_type' => 'product',
+                    'posts_per_page' => 3 , // -1; Hiển thị tất cả sản phẩm trong danh mục        	 
+                );
+                
+                if (\App\Models\Setting::getThemeOption('product_block_type') ){   
+                    $case = \App\Models\Setting::getThemeOption('product_block_type');
 
-			<?php
+                    switch ($case) {
+                        case "hot":
+                            $args = array(
+                                'post_type'      => 'product',
+                                'posts_per_page' => -1,
+                                'meta_query'     => array(
+                                    'relation' => 'OR',
+                                    array(
+                                        'key'   => 'hot_product', // Change this to your hot product custom field
+                                        'value' => '1',           // Assuming '1' means it's marked as hot
+                                    )
+                                ),
+                            ); 
+                            break;                        
+                        case "feature":
+                            $args = array(
+                                'post_type'      => 'product',
+                                'posts_per_page' => -1,
+                                'meta_query'     => array(
+                                    'relation' => 'OR' ,
+                                    array(
+                                        'key'   => '_featured',   // WooCommerce uses '_featured' for featured products
+                                        'value' => 'yes',
+                                    ),
+                                ),
+                            );
+                            break;
+                        case "new":
+                            $args = array(
+                                'post_type'      => 'product',
+                                'posts_per_page' => -1,
+                                'meta_query'     => array(
+                                    'relation' => 'OR',
+                                    array(
+                                        'key'   => 'new_product', // Change this to your new product custom field
+                                        'value' => '1',           // Assuming '1' means it's marked as new
+                                    ), 
+                                ),
+                            );
+                            break; 
+                    } 
+                }   
 				$args = array(
-					'post_type' => 'product',
-					'posts_per_page' => 3 , // -1; Hiển thị tất cả sản phẩm trong danh mục        	 
-				);
+                    'post_type' => 'product',
+                    'posts_per_page' => 3 , // -1; Hiển thị tất cả sản phẩm trong danh mục        	 
+                );
+                
+				
 				$products = new WP_Query($args);
 				if ($products->have_posts()){ 
 					while ($products->have_posts()){
@@ -97,30 +149,47 @@ get_header();
 	<div class="container">
 		<div class="row justify-content-between">
 			<div class="col-lg-6">
-				<h2 class="section-title">Tại sao Chọn Chúng Tôi</h2>
+				<h2 class="section-title">
+                    <?php echo \App\Models\Setting::getThemeOption('about_title', 'Tại sao Chọn Chúng Tôi');?>
+                </h2>
 				<p>
-				chúng tôi mang lại sự kết hợp hoàn hảo giữa thiết kế độc đáo và chất lượng xuất sắc. Chúng tôi tôn trọng nguyên liệu tự nhiên và sử dụng chúng để tạo ra những sản phẩm nội thất đẹp mắt và bền bỉ.
+                    <?php echo \App\Models\Setting::getThemeOption('about_description', 'chúng tôi mang lại sự kết hợp hoàn hảo giữa thiết kế độc đáo và chất lượng xuất sắc. Chúng tôi tôn trọng nguyên liệu tự nhiên và sử dụng chúng để tạo ra những sản phẩm nội thất đẹp mắt và bền bỉ.');?> 				
 				</p>
+
 				<div class="row my-5">
 					<div class="col-6 col-md-6">
 						<div class="feature">
+
 							<div class="icon">
-								<img src="<?=get_template_directory_uri()?>/images/truck.svg" alt="Image" class="imf-fluid">
+                                <?php if (\App\Models\Setting::getThemeOption('about_icons_one') ){ ?>
+                                    <img src="<?php echo \App\Models\Setting::getThemeOption('about_icons_one') ; ?>" />
+                                <?php } else { ?>
+                                    <img src="<?=get_template_directory_uri()?>/images/truck.svg" alt="Image" class="imf-fluid">
+                                <?php } ?> 
 							</div>
-							<h3>Nhanh &amp; Vận chuyển Free</h3>
-							<p>Vận chuyển nhanh chóng, không phát sinh chi phí vì dịch vụ hoàn toàn miễn phí</p>
+							<h3><?php echo \App\Models\Setting::getThemeOption('about_title_one', 'Nhanh &amp; Vận chuyển Free');?></h3>
+							<p><?php echo \App\Models\Setting::getThemeOption('about_description_one', 'Vận chuyển nhanh chóng, không phát sinh chi phí vì dịch vụ hoàn toàn miễn phí');?></p>
+
 						</div>
 					</div>
 
 					<div class="col-6 col-md-6">
 						<div class="feature">
 							<div class="icon">
-								<img src="<?=get_template_directory_uri()?>/images/bag.svg" alt="Image" class="imf-fluid">
+                                <?php if (\App\Models\Setting::getThemeOption('about_icons_two') ){ ?>
+                                    <img src="<?php echo \App\Models\Setting::getThemeOption('about_icons_two') ; ?>" />
+                                <?php } else { ?>
+                                    <img src="<?=get_template_directory_uri()?>/images/bag.svg" alt="Image" class="imf-fluid">
+                                <?php } ?> 
 							</div>
-							<h3>Dễ dàng di chuyển, tháo lắp</h3>
-							<p>Sản phẩm dễ dàng di chuyển và tháo lắp tới vị trí bạn cần đặt.</p>
+							<h3><?php echo \App\Models\Setting::getThemeOption('about_title_two', 'Nhanh &amp; Vận chuyển Free');?></h3>
+							<p><?php echo \App\Models\Setting::getThemeOption('about_description_one', 'Sản phẩm dễ dàng di chuyển và tháo lắp tới vị trí bạn cần đặt');?>.</p>
+                            
 						</div>
 					</div>
+
+
+
 
 					<div class="col-6 col-md-6">
 						<div class="feature">
@@ -157,7 +226,7 @@ get_header();
 <!-- End Why Choose Us Section -->
 
 <!-- Start We Help Section -->
-<div class="we-help-section" id="help">
+<!--div class="we-help-section" id="help">
 	<div class="container">
 		<div class="row justify-content-between">
 			<div class="col-lg-7 mb-5 mb-lg-0">
@@ -183,11 +252,11 @@ get_header();
 			</div>
 		</div>
 	</div>
-</div>
+</div-->
 <!-- End We Help Section -->
 
 <!-- Start Popular Product -->
-<div class="popular-product">
+<!--div class="popular-product">
 	<div class="container">
 		<div class="row">
 
@@ -238,11 +307,11 @@ get_header();
 
 		</div>
 	</div>
-</div>
+</div-->
 <!-- End Popular Product -->
 
 <!-- Start Popular Product -->
-<div class="popular-product">
+<!--div class="popular-product">
 	<div class="container">
 		<div class="row">
 
@@ -293,7 +362,7 @@ get_header();
 
 		</div>
 	</div>
-</div>
+</div-->
 <!-- End Popular Product -->
 
 <?php
