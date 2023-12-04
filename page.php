@@ -72,7 +72,7 @@
     <?php $response = vbrandsync_getResponse('/');?>
 
 
-    <p>đây là trang index</p>
+    <p>đây là trang page</p>
 
     <?php if ( have_posts() ) : ?>
         <?php while ( have_posts() ) : the_post();?>
@@ -82,8 +82,7 @@
         <p>!Sorry no posts here</p>
     <?php endif; ?>
 
-
-
+ 
 
 
 
