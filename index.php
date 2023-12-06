@@ -29,12 +29,20 @@
     <div class="collapse navbar-collapse" id="navbarsFurni">
 
         <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="<?php echo home_url('/');?>">Home</a>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo get_home_url(); ?>#">Trang Chính</a>
             </li>
-            <li><a class="nav-link" href="<?php echo home_url('/');?>shop">Shop</a></li>
+            <?php if (\App\Models\Setting::getThemeOption('why_us_module_show')) { ?>
+                <li><a class="nav-link" href="<?php echo get_home_url(); ?>#product">Sản Phẩm Mới</a></li>
+            <?php } ?>
+            <?php if (\App\Models\Setting::getThemeOption('why_us_module_show')) { ?>
+                <li><a class="nav-link" href="<?php echo get_home_url(); ?>#why-us">Về Chúng Tối</a></li>
+            <?php } ?>
+            <li><a class="nav-link" href="<?php echo get_home_url(); ?>#news">Tin Tức</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo get_home_url(); ?>?post_type=product">Gian Hàng</a>
+            </li>
         </ul>
-
 
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
         <?php
