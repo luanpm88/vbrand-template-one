@@ -37,7 +37,7 @@
 <!-- End Hero Section -->
 
 
-<?php if (\App\Models\Setting::getThemeOption('why_us_module_show')) { ?>
+<?php if (\App\Models\Setting::getThemeOption('products_module_show')) { ?>
 	<!-- Start Product Section -->
 	<div class="product-section" id="product">
 		<div class="container">
