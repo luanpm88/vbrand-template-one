@@ -6,28 +6,29 @@
 <?php
 	get_header();
 ?>
-<?php $response = vbrandsync_getResponse('/');?>
+
 <div class="hero">
 	<div class="container">
 		<div class="row justify-content-between">
             <div class="col-lg-5">
                 <div class="intro-excerpt">
                     <h1>
-
-                        <?php echo \App\Models\Setting::getThemeOption('banner_title', 'Modern Interior <span clsas="d-block">Design Studio</span>');?>
-                    <?php  
-                   // $response = vbrandsync_getResponse('/'); 
-
-                    //echo \App\Models\Setting::getThemeOption('banner_title', 'hahaha');
+                        <?php echo \App\Models\Setting::getThemeOption('banner_title');?>
+                    <?php 
                     ?>
                     </h1>
-                    <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-                    <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+                    <p class="mb-4">
+						<?php echo \App\Models\Setting::getThemeOption('banner_description');?>
+					</p>
+                    <p>
+						<a href="<?php echo \App\Models\Setting::getThemeOption('banner_main_button_link'); ?>" class="btn btn-secondary me-2"><?php echo \App\Models\Setting::getThemeOption('banner_main_button_text'); ?></a>
+						<a href="<?php echo \App\Models\Setting::getThemeOption('banner_second_button_link'); ?>" class="btn btn-white-outline"><?php echo \App\Models\Setting::getThemeOption('banner_second_button_text'); ?></a>
+					</p>
                 </div>
             </div>
 			<div class="col-lg-7">
 				<div class="hero-img-wrap">
-					<img src="<?=get_template_directory_uri()?>/images/couch.png" class="img-fluid">
+					<img src="<?php echo \App\Models\Setting::getThemeOption('banner_image'); ?>" class="img-fluid">
 				</div>
 			</div>
 		</div>
@@ -36,197 +37,189 @@
 <!-- End Hero Section -->
 
 
- 
-<!-- Start Product Section -->
-<div class="product-section" id="sanpham">
-	<div class="container">
-		<div class="row">
+<?php if (\App\Models\Setting::getThemeOption('products_module_show')) { ?>
+	<!-- Start Product Section -->
+	<div class="product-section" id="product">
+		<div class="container">
+			<div class="row">
+				<?php
+					$count = \App\Models\Setting::getThemeOption('products_module_number');
+					
+					$case = \App\Models\Setting::getThemeOption('products_module_type');
+				?>
 
-			<!-- Start Column 1 -->
-			<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-                <h2 class="mb-4 section-title">
-                    <?php echo \App\Models\Setting::getThemeOption('product_title', 'SẢN PHẨM MỚI');?>
-				</h2>
-				<p class="mb-4">
-                    <?php echo \App\Models\Setting::getThemeOption('product_description', 'Mẫu sản phẩm mới nhất được chúng tôi cập nhật hàngg ngày');?>	
-				</p>  
-			</div> 
-			<!-- End Column 1 -->
-            
-            <?php
-                $args = array(
-                    'post_type' => 'product',
-                    'posts_per_page' => 3 , // -1; Hiển thị tất cả sản phẩm trong danh mục        	 
-                );
-                
-                if (\App\Models\Setting::getThemeOption('product_block_type') ){   
-                    $case = \App\Models\Setting::getThemeOption('product_block_type');
-
-                    switch ($case) {
-                        case "hot":
-                            $args = array(
-                                'post_type'      => 'product',
-                                'posts_per_page' => -1,
-                                'meta_query'     => array(
-                                    'relation' => 'OR',
-                                    array(
-                                        'key'   => 'hot_product', // Change this to your hot product custom field
-                                        'value' => '1',           // Assuming '1' means it's marked as hot
-                                    )
-                                ),
-                            ); 
-                            break;                        
-                        case "feature":
-                            $args = array(
-                                'post_type'      => 'product',
-                                'posts_per_page' => -1,
-                                'meta_query'     => array(
-                                    'relation' => 'OR' ,
-                                    array(
-                                        'key'   => '_featured',   // WooCommerce uses '_featured' for featured products
-                                        'value' => 'yes',
-                                    ),
-                                ),
-                            );
-                            break;
-                        case "new":
-                            $args = array(
-                                'post_type'      => 'product',
-                                'posts_per_page' => -1,
-                                'meta_query'     => array(
-                                    'relation' => 'OR',
-                                    array(
-                                        'key'   => 'new_product', // Change this to your new product custom field
-                                        'value' => '1',           // Assuming '1' means it's marked as new
-                                    ), 
-                                ),
-                            );
-                            break; 
-                    } 
-                }   
-				$args = array(
-                    'post_type' => 'product',
-                    'posts_per_page' => 3 , // -1; Hiển thị tất cả sản phẩm trong danh mục        	 
-                );
-                
+				<!-- Start Column 1 -->
+				<div class="col-lg-<?php echo 12/($count+1); ?>">
+					<h2 class="mb-4 section-title">
+						<?php echo \App\Models\Setting::getThemeOption('products_module_title'); ?>
+					</h2>
+					<p class="mb-4">
+						<?php echo \App\Models\Setting::getThemeOption('products_module_description'); ?>	
+					</p>  
+				</div> 
+				<!-- End Column 1 -->
 				
-				$products = new WP_Query($args);
-				if ($products->have_posts()){ 
-					while ($products->have_posts()){
-						$products->the_post();
-						 // Ensure visibility.
-                        if ( empty( $product ) || ! $product->is_visible() ) {
-                            return;
-                        }
-                        ?>
-                        <!-- Start Column 2 -->
-                        <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                            <a class="product-item" href="<?=esc_url(get_permalink())?>">
-                                <?php the_post_thumbnail('single-post-thumbnail', array('class' => 'img-fluid product-thumbnail')); ?>
-                                
-                                <h3 class="product-title"><?=the_title()?></h3>
-                                <strong class="product-price"><?=wc_price(get_post_meta(get_the_ID(), '_price', true))?></strong>
+				<?php
+					switch ($case) {
+						case "hot":
+							$args = array(
+								'post_type'      => 'product',
+								'posts_per_page' => $count,
+								'meta_query'     => array(
+									'relation' => 'OR',
+									array(
+										'key'   => 'hot_product', // Change this to your hot product custom field
+										'value' => '1',           // Assuming '1' means it's marked as hot
+									)
+								),
+							); 
+							break;                        
+						case "feature":
+							$args = array(
+								'post_type'      => 'product',
+								'posts_per_page' => $count,
+								'meta_query'     => array(
+									'relation' => 'OR' ,
+									array(
+										'key'   => '_featured',   // WooCommerce uses '_featured' for featured products
+										'value' => 'yes',
+									),
+								),
+							);
+							break;
+						case "new":
+							$args = array(
+								'post_type'      => 'product',
+								'posts_per_page' => $count,
+								'meta_query'     => array(
+									'relation' => 'OR',
+									array(
+										'key'   => 'new_product', // Change this to your new product custom field
+										'value' => '1',           // Assuming '1' means it's marked as new
+									), 
+								),
+							);
+						default:
+							$args = array(
+								'post_type'      => 'product',
+								'posts_per_page' => $count,
+							);
+					} 
+					
+					$products = new WP_Query($args);
+					if ($products->have_posts()){ 
+						while ($products->have_posts()){
+							$products->the_post();
+							// Ensure visibility.
+							if ( empty( $product ) || ! $product->is_visible() ) {
+								return;
+							}
+							?>
+							<!-- Start Column 2 -->
+							<div class="col-lg-<?php echo 12/($count+1); ?>">
+								<a class="product-item" href="<?=esc_url(get_permalink())?>">
+									<?php if (wp_get_attachment_image_src(get_the_ID())) { ?>
+										<?php the_post_thumbnail('single-post-thumbnail', array('class' => 'img-fluid product-thumbnail')); ?>
+									<?php } else { ?>
+										<img src="<?=get_template_directory_uri()?>/images/empty_box.png" class="img-fluid product-thumbnail">
+									<?php } ?>
+									
+									<h3 class="product-title"><?=the_title()?></h3>
+									<strong class="product-price"><?=wc_price(get_post_meta(get_the_ID(), '_price', true))?></strong>
 
-                                <span class="icon-cross">
-                                    <img src="<?=get_template_directory_uri()?>/images/cross.svg" class="img-fluid">
-                                </span>
-                            </a>
-                        </div> 
-                        <!-- End Column 2 --> 
-				    <?php	
-                    }
-				}
-				wp_reset_postdata(); // Đặt lại truy vấn sản phẩm
-			?>
+									<span class="icon-cross">
+										<img src="<?=get_template_directory_uri()?>/images/cross.svg" class="img-fluid">
+									</span>
+								</a>
+							</div> 
+							<!-- End Column 2 --> 
+						<?php	
+						}
+					}
+					wp_reset_postdata(); // Đặt lại truy vấn sản phẩm
+				?>
 
+			</div>
 		</div>
 	</div>
-</div>
+<?php } ?>
  
  
 
 
+<?php if (\App\Models\Setting::getThemeOption('why_us_module_show')) { ?>
+	<!-- Start Why Choose Us Section -->
+	<div class="why-choose-section" id="why-us">
+		<div class="container">
+			<div class="row justify-content-between">
+				<div class="col-lg-6">
+					<h2 class="section-title">
+						<?php echo \App\Models\Setting::getThemeOption('why_us_module_title');?>
+					</h2>
+					<p>
+						<?php echo \App\Models\Setting::getThemeOption('why_us_module_description');?> 				
+					</p>
 
-<!-- Start Why Choose Us Section -->
-<div class="why-choose-section" id="why">
-	<div class="container">
-		<div class="row justify-content-between">
-			<div class="col-lg-6">
-				<h2 class="section-title">
-                    <?php echo \App\Models\Setting::getThemeOption('about_title', 'Tại sao Chọn Chúng Tôi');?>
-                </h2>
-				<p>
-                    <?php echo \App\Models\Setting::getThemeOption('about_description', 'chúng tôi mang lại sự kết hợp hoàn hảo giữa thiết kế độc đáo và chất lượng xuất sắc. Chúng tôi tôn trọng nguyên liệu tự nhiên và sử dụng chúng để tạo ra những sản phẩm nội thất đẹp mắt và bền bỉ.');?> 				
-				</p>
+					<div class="row my-5">
+						<div class="col-6 col-md-6">
+							<div class="feature">
 
-				<div class="row my-5">
-					<div class="col-6 col-md-6">
-						<div class="feature">
+								<div class="icon">
+									<img src="<?=\App\Models\Setting::getThemeOption('why_us_module_block_1_icon')?>" alt="Image" class="imf-fluid">
+								</div>
+								<h3><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_1_title');?></h3>
+								<p><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_1_description');?></p>
 
-							<div class="icon">
-                                <?php if (\App\Models\Setting::getThemeOption('about_icons_one') ){ ?>
-                                    <img src="<?php echo \App\Models\Setting::getThemeOption('about_icons_one') ; ?>" />
-                                <?php } else { ?>
-                                    <img src="<?=get_template_directory_uri()?>/images/truck.svg" alt="Image" class="imf-fluid">
-                                <?php } ?> 
 							</div>
-							<h3><?php echo \App\Models\Setting::getThemeOption('about_title_one', 'Nhanh &amp; Vận chuyển Free');?></h3>
-							<p><?php echo \App\Models\Setting::getThemeOption('about_description_one', 'Vận chuyển nhanh chóng, không phát sinh chi phí vì dịch vụ hoàn toàn miễn phí');?></p>
-
 						</div>
-					</div>
 
-					<div class="col-6 col-md-6">
-						<div class="feature">
-							<div class="icon">
-                                <?php if (\App\Models\Setting::getThemeOption('about_icons_two') ){ ?>
-                                    <img src="<?php echo \App\Models\Setting::getThemeOption('about_icons_two') ; ?>" />
-                                <?php } else { ?>
-                                    <img src="<?=get_template_directory_uri()?>/images/bag.svg" alt="Image" class="imf-fluid">
-                                <?php } ?> 
+						<div class="col-6 col-md-6">
+							<div class="feature">
+								<div class="icon">
+									<img src="<?=\App\Models\Setting::getThemeOption('why_us_module_block_2_icon')?>" alt="Image" class="imf-fluid">
+								</div>
+								<h3><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_2_title');?></h3>
+								<p><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_2_description');?></p>
 							</div>
-							<h3><?php echo \App\Models\Setting::getThemeOption('about_title_two', 'Nhanh &amp; Vận chuyển Free');?></h3>
-							<p><?php echo \App\Models\Setting::getThemeOption('about_description_one', 'Sản phẩm dễ dàng di chuyển và tháo lắp tới vị trí bạn cần đặt');?>.</p>
-                            
 						</div>
-					</div>
 
 
 
 
-					<div class="col-6 col-md-6">
-						<div class="feature">
-							<div class="icon">
-								<img src="<?=get_template_directory_uri()?>/images/support.svg" alt="Image" class="imf-fluid">
+						<div class="col-6 col-md-6">
+							<div class="feature">
+								<div class="icon">
+									<img src="<?=\App\Models\Setting::getThemeOption('why_us_module_block_3_icon')?>" alt="Image" class="imf-fluid">
+								</div>
+								<h3><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_3_title');?></h3>
+								<p><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_3_description');?></p>
 							</div>
-							<h3>24/7 Hỗ trợ</h3>
-							<p> Chúng tôi Luôn luôn ở đây, 24/7. Hãy tin tưởng chúng tôi khi bạn cần gấp. </p>
 						</div>
-					</div>
 
-					<div class="col-6 col-md-6">
+						<div class="col-6 col-md-6">
 						<div class="feature">
-							<div class="icon">
-								<img src="<?=get_template_directory_uri()?>/images/return.svg" alt="Image" class="imf-fluid">
+								<div class="icon">
+									<img src="<?=\App\Models\Setting::getThemeOption('why_us_module_block_4_icon')?>" alt="Image" class="imf-fluid">
+								</div>
+								<h3><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_4_title');?></h3>
+								<p><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_4_description');?></p>
 							</div>
-							<h3>Thiết kế sáng tạo, hiện địa</h3>
-							<p>Với nhiều thiết kế đẹp, sáng tạo, luôn mang đến cho bạn sức sống mới.</p>
 						</div>
-					</div>
 
+					</div>
 				</div>
-			</div>
 
-			<div class="col-lg-5">
-				<div class="img-wrap">
-					<img src="<?=get_template_directory_uri()?>/images/why-choose-us-img.jpg" alt="Image" class="img-fluid">
+				<div class="col-lg-5">
+					<div class="img-wrap">
+						<img src="<?php echo \App\Models\Setting::getThemeOption('why_us_module_banner');?>" alt="Image" class="img-fluid">
+					</div>
 				</div>
-			</div>
 
+			</div>
 		</div>
 	</div>
-</div>
-<!-- End Why Choose Us Section -->
+	<!-- End Why Choose Us Section -->
+<?php } ?>
 
 <!-- Start We Help Section -->
 <!--div class="we-help-section" id="help">
@@ -368,73 +361,95 @@
 </div-->
 <!-- End Popular Product -->
 
-<?php
 
-/**
- * Hiển thị bài viết mới nhất
- */
+<?php if (\App\Models\Setting::getThemeOption('articles_module_show')) : ?>
+	<?php
 
-$number_of_posts = 8;
+	/**
+	 * Hiển thị bài viết mới nhất
+	 */
 
-// Truy vấn các bài viết mới nhất
-$args = array(
-    'post_type' => 'post', // Loại bài viết
-    'posts_per_page' => $number_of_posts, // Số lượng bài viết muốn hiển thị
-    'orderby' => 'date', // Sắp xếp theo ngày đăng
-    'order' => 'DESC', // Thứ tự giảm dần (mới nhất trước)
-);
+	$number_of_posts = \App\Models\Setting::getThemeOption('articles_module_number');
 
-$query = new WP_Query($args);
+	// Truy vấn các bài viết mới nhất
+	$args = array(
+		'post_type' => 'post', // Loại bài viết
+		'posts_per_page' => $number_of_posts, // Số lượng bài viết muốn hiển thị
+		'post_status' => 'publish',
+		// 'orderby' => 'date', // Sắp xếp theo ngày đăng
+		// 'order' => 'DESC', // Thứ tự giảm dần (mới nhất trước)
+	);
 
-// Kiểm tra xem có bài viết nào không
-if ($query->have_posts()) : ?>
-<!-- Start Blog Section -->
-<div class="blog-section" id="blog">
-	<div class="container">
-		<div class="row mb-5">
-			<div class="col-md-6">
-				<h2 class="section-title">TIN MỚI</h2>
+	$sort = \App\Models\Setting::getThemeOption('articles_module_sort');
+	
+	if ($sort == 'newest') {
+		$args['order'] = 'DESC';
+		$args['orderby'] = 'post_date';
+	} else if ($sort == 'oldest') {
+		$args['order'] = 'ASC';
+		$args['orderby'] = 'post_date';
+	} else {
+		$args['order'] = 'DESC';
+		$args['orderby'] = 'post_date';
+	}
+
+	$query = new WP_Query($args);
+
+	// Kiểm tra xem có bài viết nào không
+	if ($query->have_posts()) : ?>
+	<!-- Start Blog Section -->
+	<div class="blog-section" id="news">
+		<div class="container">
+			<div class="row mb-5">
+				<div class="col-md-6">
+					<h2 class="section-title">TIN MỚI</h2>
+				</div>
+				<div class="col-md-6 text-start text-md-end">
+					<a href="<?=home_url('/')?>tin-tuc" class="more">Xem thêm</a>
+				</div>
 			</div>
-			<div class="col-md-6 text-start text-md-end">
-				<a href="<?=home_url('/')?>tin-tuc" class="more">Xem thêm</a>
-			</div>
-		</div>
 
-		<div class="row">
-	<?php	
-    	// Bắt đầu vòng lặp để hiển thị bài viết
-    	while ($query->have_posts()):
-        	$query->the_post();
-        	// Hiển thị tiêu đề bài viết và liên kết đến bài viết
-        	$thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'medium'); // 'thumbnail' là kích thước hình ảnh nhỏ
-			?> 
-			<div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
-				<div class="post-entry">
-					<a href="<?=get_permalink()?>" class="post-thumbnail">
+			<div class="row">
+		<?php	
+			// Bắt đầu vòng lặp để hiển thị bài viết
+			while ($query->have_posts()):
+				$query->the_post();
 
-						<?php if ($thumbnail_url): ?>
-							<img src="<?=esc_url($thumbnail_url)?>" alt="<?=get_the_title()?>" />
-						<?php else: ?> 
-                			<img src="<?=get_template_directory_uri()?>images/no-photo.jpg" alt="<?=get_the_title()?>" />   
-        				<?php endif ?>
+				$content = get_the_content();
+				$content = strip_tags($content);
+				$shortDescription = substr($content, 0, 100);
+				// Hiển thị tiêu đề bài viết và liên kết đến bài viết
+				$thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'medium'); // 'thumbnail' là kích thước hình ảnh nhỏ
+				?> 
+				<div class="col-lg-<?= 12/$number_of_posts ?>">
+					<div class="post-entry">
+						<a href="<?=get_permalink()?>" class="post-thumbnail">
 
-					</a>
-					<div class="post-content-entry">
-						<h3><?=get_the_title()?></h3> 
-						<div class="meta">
-							<span>by <a href="#"><?=the_author()?></a></span> <span>on <a href="#"><?=get_the_date()?></a></span>
+							<?php if ($thumbnail_url): ?>
+								<img src="<?=esc_url($thumbnail_url)?>" alt="<?=get_the_title()?>" />
+							<?php else: ?> 
+								<img width="100%" class="border" src="<?=get_template_directory_uri()?>/images/placeholder.svg" alt="<?=get_the_title()?>" />   
+							<?php endif ?>
+
+						</a>
+						<div class="post-content-entry">
+							<h3><?=get_the_title()?></h3> 
+							<p><?=$shortDescription?></p>
+							<div class="meta">
+								<span>by <a href="#"><?=the_author()?></a></span> <span>on <a href="#"><?=get_the_date()?></a></span>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-   
-      		<?php endwhile ?> 
-   			<?php  wp_reset_postdata();?>
+	
+				<?php endwhile ?> 
+				<?php  wp_reset_postdata();?>
 
+			</div>
 		</div>
 	</div>
-</div>
-<!-- End Blog Section --> 
+	<!-- End Blog Section --> 
+<?php endif ?>
  
 <?php endif ?> 
 

@@ -3,10 +3,10 @@
 			<div class="container relative">
 
 				<div class="sofa-img">
-					<img src="<?=get_template_directory_uri()?>/images/sofa.png" alt="Image" class="img-fluid">
+					<img src="<?=\App\Models\Setting::getThemeOption('footer_logo')?>" alt="Image" class="img-fluid">
 				</div>
 
-				<div class="row">
+				<div class="row d-none">
 					<div class="col-lg-8">
 						<div class="subscription-form">
 							<h3 class="d-flex align-items-center">
@@ -33,7 +33,7 @@
 					</div>
 				</div>
 
-				<div class="row g-5 mb-5">
+				<div class="row g-5 mb-5 d-none">
 					<div class="col-lg-4">
 						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Woo vBrand<span>.</span></a></div>
 						<p class="mb-4">  
@@ -97,12 +97,11 @@
 					<div class="row pt-4">
 						<div class="col-lg-6">
 							<p class="mb-2 text-center text-lg-start">
-								Bản quyền &copy;<script>document.write(new Date().getFullYear());</script>. 
-								Woo vBrand.
+								<?=\App\Models\Setting::getThemeOption('copyright_line')?>
             				</p>
 						</div>
 
-						<div class="col-lg-6 text-center text-lg-end">
+						<div class="col-lg-6 text-center text-lg-end d-none">
 							<ul class="list-unstyled d-inline-flex ms-auto">
 								<li class="me-4"><a href="#">Điều khoản</a></li>
 								<li class="me-4"><a href="#">Hỗ trợ</a></li>
