@@ -78,4 +78,7 @@
             </div>                
         </nav>
         <!-- End Header/Navigation -->
- 
+        <div class="product-section" id="product">
+            <div class="container">
+                <div class="row">  
+                    <div class="col-lg-12">

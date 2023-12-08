@@ -7,9 +7,7 @@
             <div class="col-lg-12">
                 <h2 class="section-title">
                     <?php the_title(); ?>
-                </h2>
-                <p> 
-                </p>
+                </h2> 
             </div> 
             <div class="col-lg-12">
                 <?php if ( have_posts() ) : ?>

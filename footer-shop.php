@@ -1,5 +1,9 @@
 <!-- Start Footer Section -->
-<footer class="footer-section">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer-section">
 			<div class="container relative">
 
 				<div class="sofa-img">
