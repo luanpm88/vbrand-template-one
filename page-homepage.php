@@ -426,7 +426,7 @@
 						<a href="<?=get_permalink()?>" class="post-thumbnail">
 
 							<?php if ($thumbnail_url): ?>
-								<img src="<?=esc_url($thumbnail_url)?>" alt="<?=get_the_title()?>" />
+								<img width="100%" src="<?=esc_url($thumbnail_url)?>" alt="<?=get_the_title()?>" />
 							<?php else: ?> 
 								<img width="100%" class="border" src="<?=get_template_directory_uri()?>/images/placeholder.svg" alt="<?=get_the_title()?>" />   
 							<?php endif ?>
