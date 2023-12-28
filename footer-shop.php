@@ -1,3 +1,7 @@
+<?php
+    $themeData = vbrand_load_theme_data();
+?>
+
 <!-- Start Footer Section -->
                     </div>
                 </div>
@@ -8,7 +12,7 @@
 
 				<div class="sofa-img">
 					<?php if (is_front_page()):?>
-					<img src="<?=\App\Models\Setting::getThemeOption('footer_logo')?>" alt="Image" class="img-fluid">
+					<img src="<?=$themeData->get('footer_logo')?>" alt="Image" class="img-fluid">
 					<?php endif ?>
 					
 				</div>
@@ -104,7 +108,7 @@
 					<div class="row pt-4">
 						<div class="col-lg-6">
 							<p class="mb-2 text-center text-lg-start">
-								<?=\App\Models\Setting::getThemeOption('copyright_line')?>
+								<?=$themeData->get('copyright_line')?>
             				</p>
 						</div>
 

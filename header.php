@@ -1,4 +1,6 @@
-<?php $response = vbrandsync_getResponse('/');?>
+<?php
+    $themeData = vbrand_load_theme_data();
+?>
 
 <!doctype html>
 <html lang="vi">
@@ -24,8 +26,8 @@
 
             <div class="container">
                 <a class="navbar-brand" href="<?php echo home_url('/');?>">
-                    <?php if (\App\Models\Setting::getThemeOption('site_logo')) { ?>
-                        <img src="<?php echo \App\Models\Setting::getThemeOption('site_logo'); ?>" width="150" alt="">
+                    <?php if ($themeData->get('site_logo')) { ?>
+                        <img src="<?php echo $themeData->get('site_logo'); ?>" width="150" alt="">
                     <?php } else { ?>
                         Woo vBrand<span>.</span>
                     <?php } ?>
