@@ -1,5 +1,5 @@
 <?php
-    $themeData = vbrand_load_theme_data();
+    $themeData = vbrand_load_theme_data(); 
 ?>
 
 <!doctype html>

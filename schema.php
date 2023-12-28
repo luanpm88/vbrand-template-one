@@ -289,6 +289,12 @@ return [
         'default' => get_template_directory_uri() . '/images/sofa.png',
     ],
      // FOOTER
+     [
+        'type' => 'boolean',
+        'name' => 'about_us_show',
+        'label' => 'Show About Us Module',
+        'default' => true,
+    ],
     [
         'type' => 'textarea',
         'name' => 'aboutus_content',

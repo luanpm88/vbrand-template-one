@@ -10,31 +10,30 @@
 	<div class="container">
 		<div class="row justify-content-between">
             <div class="col-lg-5">
-                <div class="intro-excerpt">
-                    <h1>
-                         <?php the_title();?>
-                    </h1>
-                    <p class="mb-4">
-						<?php the_except();?>
-					</p> 
-                </div>
-				<div class="content">
-					<?php the_content();?>
-				</div>
+                <div class="intro-excerpt"> 
+					<?php if ($themeData->get('about_us_show')) { ?> 
+					<h1><?php echo $themeData->get('about_us_title');?>  </h1> 
+						<div class="content">
+							<?php echo $themeData->get('about_us_content'); ?>
+						</div>
+					<?php } ?>
+				</div>  
             </div>
 			<div class="col-lg-7">
 				<div class="hero-img-wrap">
 					<?php 
-						$thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'large'); // 'thumbnail' là kích thước hình ảnh nhỏ
-
+						$thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'large'); 
+						/**
+						 * list size: 
+						 * 		Thumbnail
+						 * 		Medium
+						 * 		Large
+						 * 		Full Size
+						 */ 
 					?>
 					<?php if ($thumbnail_url): ?>
-						<img width="100%" src="<?=esc_url($thumbnail_url)?>" alt="<?=get_the_title()?>" />
-					<?php else: ?> 
-						<img width="100%" class="border" src="<?=get_template_directory_uri()?>/images/placeholder.svg" alt="<?=get_the_title()?>" />   
-					<?php endif ?>
-					
-					<img src="<?php echo $themeData->get('banner_image'); ?>" class="img-fluid">
+						<img width="100%" src="<?=esc_url($thumbnail_url)?>" alt="<?=get_the_title()?>" class="img-fluid"  />
+					<?php endif ?> 
 				</div>
 			</div>
 		</div>
