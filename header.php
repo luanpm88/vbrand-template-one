@@ -15,8 +15,9 @@
         <!-- Woo themes CSS -->
         <link href="<?=get_template_directory_uri()?>/css/tiny-slider.css" rel="stylesheet">
         <link href="<?=get_template_directory_uri()?>/css/style.css" rel="stylesheet">   
-        <title></title> 
-        <?php  wp_head(); ?>
+        <title>Funiture shop</title>
+        <?php wp_head(); ?>
+        <link href="<?=get_template_directory_uri()?>/css/mystyle.css" rel="stylesheet">
     </head>
     <body <?php body_class(); ?>>
         <!-- Start Header/Navigation -->

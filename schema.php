@@ -301,4 +301,7 @@ return [
         'label' => 'About Us title',
         'default' => '© 2017–2023 vBrand Company, Inc. · <a href="#" class="fw-semibold">Privacy</a> · <a href="#" class="fw-semibold">Terms</a>',
     ],
+
+
+
 ];
