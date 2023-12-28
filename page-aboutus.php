@@ -34,7 +34,7 @@
 						<img width="100%" class="border" src="<?=get_template_directory_uri()?>/images/placeholder.svg" alt="<?=get_the_title()?>" />   
 					<?php endif ?>
 					
-					<img src="<?php echo \App\Models\Setting::getThemeOption('banner_image'); ?>" class="img-fluid">
+					<img src="<?php echo $themeData->get('banner_image'); ?>" class="img-fluid">
 				</div>
 			</div>
 		</div>
@@ -43,24 +43,24 @@
 <!-- End Hero Section -->
 
 
-<?php if (\App\Models\Setting::getThemeOption('products_module_show')) { ?>
+<?php if ($themeData->get('products_module_show')) { ?>
 	<!-- Start Product Section -->
 	<div class="product-section" id="product">
 		<div class="container">
 			<div class="row">
 				<?php
-					$count = \App\Models\Setting::getThemeOption('products_module_number');
+					$count = $themeData->get('products_module_number');
 					
-					$case = \App\Models\Setting::getThemeOption('products_module_type');
+					$case = $themeData->get('products_module_type');
 				?>
 
 				<!-- Start Column 1 -->
 				<div class="col-lg-<?php echo 12/($count+1); ?>">
 					<h2 class="mb-4 section-title">
-						<?php echo \App\Models\Setting::getThemeOption('products_module_title'); ?>
+						<?php echo $themeData->get('products_module_title'); ?>
 					</h2>
 					<p class="mb-4">
-						<?php echo \App\Models\Setting::getThemeOption('products_module_description'); ?>	
+						<?php echo $themeData->get('products_module_description'); ?>	
 					</p>  
 				</div> 
 				<!-- End Column 1 -->
@@ -153,17 +153,17 @@
  
 
 
-<?php if (\App\Models\Setting::getThemeOption('why_us_module_show')) { ?>
+<?php if ($themeData->get('why_us_module_show')) { ?>
 	<!-- Start Why Choose Us Section -->
 	<div class="why-choose-section" id="why-us">
 		<div class="container">
 			<div class="row justify-content-between">
 				<div class="col-lg-6">
 					<h2 class="section-title">
-						<?php echo \App\Models\Setting::getThemeOption('why_us_module_title');?>
+						<?php echo $themeData->get('why_us_module_title');?>
 					</h2>
 					<p>
-						<?php echo \App\Models\Setting::getThemeOption('why_us_module_description');?> 				
+						<?php echo $themeData->get('why_us_module_description');?> 				
 					</p>
 
 					<div class="row my-5">
@@ -171,10 +171,10 @@
 							<div class="feature">
 
 								<div class="icon">
-									<img src="<?=\App\Models\Setting::getThemeOption('why_us_module_block_1_icon')?>" alt="Image" class="imf-fluid">
+									<img src="<?=$themeData->get('why_us_module_block_1_icon')?>" alt="Image" class="imf-fluid">
 								</div>
-								<h3><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_1_title');?></h3>
-								<p><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_1_description');?></p>
+								<h3><?php echo $themeData->get('why_us_module_block_1_title');?></h3>
+								<p><?php echo $themeData->get('why_us_module_block_1_description');?></p>
 
 							</div>
 						</div>
@@ -182,10 +182,10 @@
 						<div class="col-6 col-md-6">
 							<div class="feature">
 								<div class="icon">
-									<img src="<?=\App\Models\Setting::getThemeOption('why_us_module_block_2_icon')?>" alt="Image" class="imf-fluid">
+									<img src="<?=$themeData->get('why_us_module_block_2_icon')?>" alt="Image" class="imf-fluid">
 								</div>
-								<h3><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_2_title');?></h3>
-								<p><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_2_description');?></p>
+								<h3><?php echo $themeData->get('why_us_module_block_2_title');?></h3>
+								<p><?php echo $themeData->get('why_us_module_block_2_description');?></p>
 							</div>
 						</div>
 
@@ -195,20 +195,20 @@
 						<div class="col-6 col-md-6">
 							<div class="feature">
 								<div class="icon">
-									<img src="<?=\App\Models\Setting::getThemeOption('why_us_module_block_3_icon')?>" alt="Image" class="imf-fluid">
+									<img src="<?=$themeData->get('why_us_module_block_3_icon')?>" alt="Image" class="imf-fluid">
 								</div>
-								<h3><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_3_title');?></h3>
-								<p><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_3_description');?></p>
+								<h3><?php echo $themeData->get('why_us_module_block_3_title');?></h3>
+								<p><?php echo $themeData->get('why_us_module_block_3_description');?></p>
 							</div>
 						</div>
 
 						<div class="col-6 col-md-6">
 						<div class="feature">
 								<div class="icon">
-									<img src="<?=\App\Models\Setting::getThemeOption('why_us_module_block_4_icon')?>" alt="Image" class="imf-fluid">
+									<img src="<?=$themeData->get('why_us_module_block_4_icon')?>" alt="Image" class="imf-fluid">
 								</div>
-								<h3><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_4_title');?></h3>
-								<p><?php echo \App\Models\Setting::getThemeOption('why_us_module_block_4_description');?></p>
+								<h3><?php echo $themeData->get('why_us_module_block_4_title');?></h3>
+								<p><?php echo $themeData->get('why_us_module_block_4_description');?></p>
 							</div>
 						</div>
 
@@ -217,7 +217,7 @@
 
 				<div class="col-lg-5">
 					<div class="img-wrap">
-						<img src="<?php echo \App\Models\Setting::getThemeOption('why_us_module_banner');?>" alt="Image" class="img-fluid">
+						<img src="<?php echo $themeData->get('why_us_module_banner');?>" alt="Image" class="img-fluid">
 					</div>
 				</div>
 
@@ -232,14 +232,14 @@
 
 <div class="container">
 	<div class="row section-heading align-items-end">
-		<h6 class="text-danger mb-3 col-12 text-uppercase ls-2"><?php echo \App\Models\Setting::getThemeOption('our_project_module_title');?></h6>
+		<h6 class="text-danger mb-3 col-12 text-uppercase ls-2"><?php echo $themeData->get('our_project_module_title');?></h6>
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-6">
-					<h2 class="display-5 fw-700 lh-1 m-0 text-dark"><?php echo \App\Models\Setting::getThemeOption('our_project_module_alias');?></h2>
+					<h2 class="display-5 fw-700 lh-1 m-0 text-dark"><?php echo $themeData->get('our_project_module_alias');?></h2>
 				</div>
 				<div class="col-md-6 pt-3 pt-md-0">
-					<p class="m-0"><?php echo \App\Models\Setting::getThemeOption('our_project_module_description');?></p>
+					<p class="m-0"><?php echo $themeData->get('our_project_module_description');?></p>
 				</div>
 			</div>
 		</div>
@@ -252,10 +252,10 @@
 	</div>
 	<div class="row g-3">
 		<div class="col-md-6">
-			<img src="<?php echo \App\Models\Setting::getThemeOption('our_project_project_1');?>" alt="Image" class="img-fluid rd-9">
+			<img src="<?php echo $themeData->get('our_project_project_1');?>" alt="Image" class="img-fluid rd-9">
 		</div>
 		<div class="col-md-6">
-			<img src="<?php echo \App\Models\Setting::getThemeOption('our_project_project_2');?>" alt="Image" class="img-fluid rd-9">
+			<img src="<?php echo $themeData->get('our_project_project_2');?>" alt="Image" class="img-fluid rd-9">
 		</div>
 	</div>
 </div> 
@@ -403,14 +403,14 @@
 <!-- End Popular Product -->
 
 
-<?php if (\App\Models\Setting::getThemeOption('articles_module_show')) : ?>
+<?php if ($themeData->get('articles_module_show')) : ?>
 	<?php
 
 	/**
 	 * Hiển thị bài viết mới nhất
 	 */
 
-	$number_of_posts = \App\Models\Setting::getThemeOption('articles_module_number');
+	$number_of_posts = $themeData->get('articles_module_number');
 
 	// Truy vấn các bài viết mới nhất
 	$args = array(
@@ -421,7 +421,7 @@
 		// 'order' => 'DESC', // Thứ tự giảm dần (mới nhất trước)
 	);
 
-	$sort = \App\Models\Setting::getThemeOption('articles_module_sort');
+	$sort = $themeData->get('articles_module_sort');
 	
 	if ($sort == 'newest') {
 		$args['order'] = 'DESC';
