@@ -1,33 +1,39 @@
 <?php
 /**
- * Template Name: Sản phẩm define
+ * Template Name: About Us
  */
 ?> 
 <?php
 	get_header();
 ?>
-
 <div class="hero">
 	<div class="container">
 		<div class="row justify-content-between">
             <div class="col-lg-5">
                 <div class="intro-excerpt">
                     <h1>
-                        <?php echo \App\Models\Setting::getThemeOption('banner_title');?>
-                    <?php 
-                    ?>
+                         <?php the_title();?>
                     </h1>
                     <p class="mb-4">
-						<?php echo \App\Models\Setting::getThemeOption('banner_description');?>
-					</p>
-                    <p>
-						<a href="<?php echo \App\Models\Setting::getThemeOption('banner_main_button_link'); ?>" class="btn btn-secondary me-2"><?php echo \App\Models\Setting::getThemeOption('banner_main_button_text'); ?></a>
-						<a href="<?php echo \App\Models\Setting::getThemeOption('banner_second_button_link'); ?>" class="btn btn-white-outline"><?php echo \App\Models\Setting::getThemeOption('banner_second_button_text'); ?></a>
-					</p>
+						<?php the_except();?>
+					</p> 
                 </div>
+				<div class="content">
+					<?php the_content();?>
+				</div>
             </div>
 			<div class="col-lg-7">
 				<div class="hero-img-wrap">
+					<?php 
+						$thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'large'); // 'thumbnail' là kích thước hình ảnh nhỏ
+
+					?>
+					<?php if ($thumbnail_url): ?>
+						<img width="100%" src="<?=esc_url($thumbnail_url)?>" alt="<?=get_the_title()?>" />
+					<?php else: ?> 
+						<img width="100%" class="border" src="<?=get_template_directory_uri()?>/images/placeholder.svg" alt="<?=get_the_title()?>" />   
+					<?php endif ?>
+					
 					<img src="<?php echo \App\Models\Setting::getThemeOption('banner_image'); ?>" class="img-fluid">
 				</div>
 			</div>

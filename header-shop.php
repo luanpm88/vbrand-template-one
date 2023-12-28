@@ -1,5 +1,4 @@
 <?php $response = vbrandsync_getResponse('/');?>
-
 <!doctype html>
 <html lang="vi">
     <head>
@@ -15,8 +14,9 @@
         <!-- Woo themes CSS -->
         <link href="<?=get_template_directory_uri()?>/css/tiny-slider.css" rel="stylesheet">
         <link href="<?=get_template_directory_uri()?>/css/style.css" rel="stylesheet">   
-        <title></title> 
+        <title>Funiture shop</title>
         <?php  wp_head(); ?>
+        <link href="<?=get_template_directory_uri()?>/css/mystyle.css" rel="stylesheet">
     </head>
     <body <?php body_class(); ?>>
         <!-- Start Header/Navigation -->
@@ -78,7 +78,7 @@
             </div>                
         </nav>
         <!-- End Header/Navigation -->
-        <div class="product-section" id="product">
+        <div class="product-section p-0" id="product">
             <div class="container">
                 <div class="row">  
                     <div class="col-lg-12">

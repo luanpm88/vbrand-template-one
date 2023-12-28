@@ -60,7 +60,7 @@ return [
         'label' => 'Banner Second Button Text',
         'default' => 'Explore',
     ],
-
+    
     // PRODUCTS MODULE
     [
         'type' => 'boolean',
@@ -204,6 +204,46 @@ return [
         'default' => get_template_directory_uri() . '/images/return.svg',
     ],
 
+    
+    // OURS project
+    [
+        'type' => 'boolean',
+        'name' => 'our_project_module_show',
+        'label' => 'Show Our Project Module',
+        'default' => true,
+    ],
+    [
+        'type' => 'text',
+        'name' => 'our_project_module_title',
+        'label' => 'Our Project Module Title',
+        'default' => 'Dự án',
+    ],
+    [
+        'type' => 'text',
+        'name' => 'our_project_module_alias',
+        'label' => 'Our Project Module Alias',
+        'default' => 'Dự án đã triển khai',
+    ],
+    [
+        'type' => 'text',
+        'name' => 'our_project_module_description',
+        'label' => 'Our Project Module Description',
+        'default' => 'Trải nghiệm các dự án do chúng tôi trực tiếp thiết kế và thi công',
+    ],
+    [
+        'type' => 'image',
+        'name' => 'our_project_project_1',
+        'label' => 'Our Project Module: Project 1',
+        'default' => get_template_directory_uri() . '/images/project-1.jpg',
+    ],
+    [
+        'type' => 'image',
+        'name' => 'our_project_project_2',
+        'label' => 'Our Project Module: Project 2',
+        'default' => get_template_directory_uri() . '/images/project-2.jpg',
+    ], 
+
+
     // ARTICLES
     [
         'type' => 'boolean',
@@ -247,5 +287,18 @@ return [
         'name' => 'footer_logo',
         'label' => 'Footer Logo',
         'default' => get_template_directory_uri() . '/images/sofa.png',
+    ],
+     // FOOTER
+    [
+        'type' => 'textarea',
+        'name' => 'aboutus_content',
+        'label' => 'About Us content',
+        'default' => '© 2017–2023 vBrand Company, Inc. · <a href="#" class="fw-semibold">Privacy</a> · <a href="#" class="fw-semibold">Terms</a>',
+    ],
+    [
+        'type' => 'text',
+        'name' => 'aboutus_title',
+        'label' => 'About Us title',
+        'default' => '© 2017–2023 vBrand Company, Inc. · <a href="#" class="fw-semibold">Privacy</a> · <a href="#" class="fw-semibold">Terms</a>',
     ],
 ];

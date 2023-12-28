@@ -18,43 +18,55 @@
 defined( 'ABSPATH' ) || exit;
 
 get_header( 'shop' );
-
-/**
- * Hook: woocommerce_before_main_content.
- *
- * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
- * @hooked woocommerce_breadcrumb - 20
- * @hooked WC_Structured_Data::generate_website_data() - 30
- */
-do_action( 'woocommerce_before_main_content' );
-
 ?>
 
-<header class="woocommerce-products-header">
-	<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
-		<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
-	<?php endif; ?>
 
-	<?php
-	/**
-	 * Hook: woocommerce_archive_description.
-	 *
-	 * @hooked woocommerce_taxonomy_archive_description - 10
-	 * @hooked woocommerce_product_archive_description - 10
-	 */
-	do_action( 'woocommerce_archive_description' );
-	?>
-</header>
 
-<div class="product-section">
+<div class="container">
+        <div class="row">  
+			<div class="col-lg-12"> 
+				<?php
+
+					/**
+					 * Hook: woocommerce_before_main_content.
+					 *
+					 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+					 * @hooked woocommerce_breadcrumb - 20
+					 * @hooked WC_Structured_Data::generate_website_data() - 30
+					 */
+					do_action( 'woocommerce_before_main_content' );
+
+				?>
+			</div>
+            <div class="col-lg-12"> 
+			<header class="woocommerce-products-header">
+				
+				<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+					<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
+				<?php endif; ?>
+
+				<?php
+				/**
+				 * Hook: woocommerce_archive_description.
+				 *
+				 * @hooked woocommerce_taxonomy_archive_description - 10
+				 * @hooked woocommerce_product_archive_description - 10
+				 */
+				do_action( 'woocommerce_archive_description' );
+				?>
+			</header>
+		</div>
+	</div>
+</div>
+
+<div class="product-section p-0">
     <div class="container">
         <div class="row">  
-            <div class="col-lg-8"> 
-
-
+            <div class="col-lg-9">
+			 
 <?php
 if ( woocommerce_product_loop() ) {?>
-
+<div class="my-4">
 <?php
 	/**
 	 * Hook: woocommerce_before_shop_loop.
@@ -65,6 +77,8 @@ if ( woocommerce_product_loop() ) {?>
 	 */
 	do_action( 'woocommerce_before_shop_loop' );
 ?>
+</div>
+
 <?php
 	woocommerce_product_loop_start();
 
@@ -89,6 +103,7 @@ if ( woocommerce_product_loop() ) {?>
 	 * @hooked woocommerce_pagination - 10
 	 */
 	do_action( 'woocommerce_after_shop_loop' );
+	
 } else {
 	/**
 	 * Hook: woocommerce_no_products_found.
@@ -101,37 +116,39 @@ if ( woocommerce_product_loop() ) {?>
 
 ?>
 			</div> 
-			<div class="col-lg-4">
-				<?php
-				if (class_exists('WooCommerce')) {
-					//dynamic_sidebar('filter-widget-area');
-					// Kiểm tra xem sidebar có tồn tại hay không
-					if (is_active_sidebar('filter-widget-area')) {
-						the_widget('WC_Widget_Price_Filter', array(), array('widget_id' => 'filter-widget-area'));
+			<div class="col-lg-3">
+				<div class="filter-widget-area mb-50">
+					<?php
+					if (class_exists('WooCommerce')) {
 						//dynamic_sidebar('filter-widget-area');
+						// Kiểm tra xem sidebar có tồn tại hay không
+						if (is_active_sidebar('filter-widget-area')) {
+							the_widget('WC_Widget_Price_Filter', array(), array('widget_id' => 'filter-widget-area'));
+							//dynamic_sidebar('filter-widget-area');
+						}
+					?>
+				</div>
+				<div class="widget_category_filter">
+					<h2 class="widgettitle">DANH MỤC SẢN PHẨM</h2>
+					<?php
+						//--- show list category 
+						$args = array(
+							'taxonomy' => 'product_cat',
+							'title_li' => '',
+						);
+						wp_list_categories($args);
 					}
-				?>
-				<h3> dan mục sản phẩm </h3>
-				<?php
-					//--- show list category 
-					$args = array(
-						'taxonomy' => 'product_cat',
-						'title_li' => '',
-					);
-				
-					wp_list_categories($args);
+					?>
 
-				}
-				?>
-
-				<?php 
-				/**
-				 * Hook: woocommerce_sidebar.
-				 *
-				 * @hooked woocommerce_get_sidebar - 10
-				 */
-				//do_action( 'woocommerce_sidebar' );
-				?>
+					<?php 
+					/**
+					 * Hook: woocommerce_sidebar.
+					 *
+					 * @hooked woocommerce_get_sidebar - 10
+					 */
+					//do_action( 'woocommerce_sidebar' );
+					?>
+				</div>
             </div> 
         </div> 
     </div> 

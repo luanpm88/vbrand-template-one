@@ -68,5 +68,18 @@ function add_menu_link_class($atts, $item, $args) {
 
 add_filter('nav_menu_link_attributes', 'add_menu_link_class', 10, 3);
 */
+function link_shop_page(){ 
+    if (class_exists('WooCommerce')) {
+        // Get the shop page ID from the options table
+        $shop_page_id = get_option('woocommerce_shop_page_id');
 
+        // Check if the shop page ID is valid
+        if ($shop_page_id) {
+            // Get the permalink of the shop page
+            $shop_page_link = get_permalink($shop_page_id);
+            return esc_url($shop_page_link);
+        }
+    }
+    return '';
+}
 ?>
