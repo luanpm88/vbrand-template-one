@@ -3,7 +3,11 @@
    2. Cài vBrandSync plugin:
       - cd wp-content/plugins
       - git clone git@github.com:luanpm88/vbrandsync.git
-      - Activate vBrandSync plugin.
+      - # Activate vBrandSync plugin.
+      - php composer.phar install
+      - cp .env.example .env
+      - php artisan key:generate
+      - php artisan migrate
 
 # WordPress Theme Installation Instructions
    1. Cài theme vBrand Template One:
