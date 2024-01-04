@@ -140,6 +140,58 @@ if (!$vbrand_one_menu_setup){
 }
 
 
+//---- product fiter
+add_filter ('woocommerce_variation_prices_price', 'custom_variation_price', 99, 3);
+add_filter ('woocommerce_variation_prices_regular_price', 'custom_variation_price', 99, 3);
+
+function custom_variation_price ($price, $variation, $product) {
+    wc_delete_product_transients ($variation->get_id ());
+    $product_id = $product->is_type ('variation') ? $product->get_parent_id () : $product->get_id ();
+    if (has_term ('option 4', 'pa_choose_options', $product_id)) {
+        return $price * 1.5;
+    } else {
+        return $price;
+    }
+}
+
+//--------- ajax 
+
+ 
+	
+add_action( 'wp_ajax_productbycat', 'productbycat_init' );
+add_action( 'wp_ajax_nopriv_productbycat', 'productbycat_init' );
+function productbycat_init() { 
+    $category_ids = (isset($_POST['category_ids']))?esc_attr($_POST['category_ids']) : '';
+    if ($category_ids) {
+		$result = '';
+        $args = array(
+            'post_type' => 'product',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field' => 'term_id',
+                    'terms' => $category_ids,
+                    'operator' => 'IN',
+                ),
+            ),
+        ); 
+        $query = new WP_Query($args);
+
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                // Hiển thị thông tin sản phẩm theo nhu cầu của bạn
+                $result .= get_the_title();
+            }
+            wp_reset_postdata();
+        }
+        echo $result;
+        wp_send_json_success($result);
+    }
+    die();  //---- bắt buộc phải có khi kết thúc
+}
+
+
 
 
 
