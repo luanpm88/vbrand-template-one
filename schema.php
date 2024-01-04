@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * 1. home
+ * 2. About us
+ * 3. News
+ * 4. Contact
+ * 5. Shop
+ * 
+ */
+
 return [
     // SITE NAME
     [
@@ -16,7 +25,71 @@ return [
         'label' => 'Site logo',
         'default' => null,
     ],
+    // Menus
+    [
+        'type' => 'list',
+        'name' => 'menus',
+        'label' => 'Menus',
+        'max' => 10,
+        'default' => [
+            [
+                'show' => true,
+                'title' => 'Home',
+                'type' => 'page-homepage.php',
+            ],
+            [
+                'show' => true,
+                'title' => 'About Us',
+                'type' => 'page-aboutus.php',
+            ],
 
+            [
+                 'show' => true,
+                 'title' => 'Shop',
+                 'type' => 'shop',
+            ],
+            [
+                 'show' => true,
+                 'title' => 'News',
+                 'type' => 'page-news.php',
+            ],
+            [
+                 'show' => true,
+                 'title' => 'Contact Us',
+                 'type' => 'page-contact.php',
+            ],
+
+        ],
+        'schema' => [
+            // show
+            [
+                'type' => 'boolean',
+                'name' => 'show',
+                'label' => 'Hiển thị',
+                'default' => true,
+            ],
+            [
+                'type' => 'text',
+                'name' => 'title',
+                'label' => 'Tên menu',
+                'default' => '',
+            ],
+            [
+                'type' => 'select',
+                'name' => 'type',
+                'label' => 'Chọn Loại Menu',
+                'default' => '',
+                'options' => [
+                    ['value' => 'page-homepage.php', 'text' => 'Home'],
+                    ['value' => 'page-aboutus.php', 'text' => 'About Us'],
+                    ['value' => '', 'text' => 'Shop'],
+                    ['value' => 'page-news.php', 'text' => 'News'],
+                    ['value' => 'page-contact', 'text' => 'Contact Us'],
+                ],
+            ],
+        
+        ],
+    ],
     // BANNER
     [
         'type' => 'image',
@@ -289,16 +362,34 @@ return [
         'default' => get_template_directory_uri() . '/images/sofa.png',
     ],
      // FOOTER
-    [
-        'type' => 'textarea',
-        'name' => 'aboutus_content',
-        'label' => 'About Us content',
-        'default' => '© 2017–2023 vBrand Company, Inc. · <a href="#" class="fw-semibold">Privacy</a> · <a href="#" class="fw-semibold">Terms</a>',
+     [
+        'type' => 'boolean',
+        'name' => 'about_us_show',
+        'label' => 'Show About Us Module',
+        'default' => true,
     ],
     [
         'type' => 'text',
         'name' => 'aboutus_title',
         'label' => 'About Us title',
-        'default' => '© 2017–2023 vBrand Company, Inc. · <a href="#" class="fw-semibold">Privacy</a> · <a href="#" class="fw-semibold">Terms</a>',
+        'default' => 'Giới thiệu',
     ],
+    // FOOTER LOGO
+    [
+        'type' => 'image',
+        'name' => 'aboutus_image',
+        'label' => 'Image About Us',
+        'default' => get_template_directory_uri() . '/images/why-choose-us-img.jpg',
+    ],
+    [
+        'type' => 'textarea',
+        'name' => 'aboutus_content',
+        'label' => 'About Us content',
+        'default' => '<p>chúng tôi mang lại sự kết hợp hoàn hảo giữa thiết kế độc đáo và chất lượng xuất sắc. Chúng tôi tôn trọng nguyên liệu tự nhiên và sử dụng chúng để tạo ra những sản phẩm nội thất đẹp mắt và bền bỉ. </p>   ',
+    ],
+
+     
+
+
+
 ];

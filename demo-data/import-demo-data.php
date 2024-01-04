@@ -10,20 +10,22 @@ if ($demo_data_imported !== '1') {
     /**
      *---------------- Tạo menu
      */
-    $menu_exists = wp_get_nav_menu_object('primary-menu');
+    $menu_exists = wp_get_nav_menu_object('Primary vBrand One Menu');
     $menu_id = '';
     if (!$menu_exists) {
         // Nếu menu chưa tồn tại, hãy tạo nó
-        $menu_id = wp_create_nav_menu('Primary Menu');
+        $menu_id = wp_create_nav_menu('Primary vBrand One Menu');
     
-        // Đăng ký menu với theme
         $locations = get_theme_mod('nav_menu_locations');
-        $locations['primary-menu'] = $menu_id;
+        $locations['primary-menu'] = $menu_id;  
         set_theme_mod('nav_menu_locations', $locations);
  
     }else {
         // Nếu menu đã tồn tại, lấy ID của nó
         $menu_id = $menu_exists->term_id;
+        $locations = get_theme_mod('nav_menu_locations');
+        $locations['primary-menu'] = $menu_id;  
+        set_theme_mod('nav_menu_locations', $locations);
     }
 
     /**
@@ -41,6 +43,18 @@ if ($demo_data_imported !== '1') {
             'post_content'  => 'This is About Us page',
             'post_status'   => 'publish',
             'post_type'     => 'page',
+        ),        
+        array(
+            'post_title'    => 'Shop',
+            'post_content'  => 'Your Shop page content goes here.',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+        ),
+        array(
+            'post_title'    => 'News',
+            'post_content'  => 'News list.',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
         ),
         array(
             'post_title'    => 'Contact',
@@ -48,23 +62,18 @@ if ($demo_data_imported !== '1') {
             'post_status'   => 'publish',
             'post_type'     => 'page',
         ),
-        array(
-            'post_title'    => 'Shop',
-            'post_content'  => 'Your Shop page content goes here.',
-            'post_status'   => 'publish',
-            'post_type'     => 'page',
-        )
     );
     foreach($page_args as $page_arg){ 
        solv_page($menu_id, $page_arg['post_title'], $page_arg); 
-    }  
+    }
 
     // Đánh dấu là đã import dữ liệu để không import lần nữa
     update_option('demo_data_imported', '1');
+    update_option('vbrand_one_menu_setup', true);
+    update_option('vbrand_logitech_menu_setup', false);
 }
 // Hook để chạy hàm import khi theme được kích hoạt
 //add_action('after_switch_theme', 'import_demo_data');
-
 
 
 
@@ -100,6 +109,16 @@ function solv_page($menu_id, $title_page ='', $page_arg =''){
         // Đặt trang Home làm trang frontpage
         update_option('page_on_front', $page_id);
         update_option('show_on_front', 'page');
+    }
+    
+    if( $page->post_title == 'About Us' ){
+        $aboutus_template = 'page-aboutus.php';
+        update_post_meta($page_id, '_wp_page_template', $aboutus_template);
+    }
+
+    if( $page->post_title == 'News' ){
+        $post_template = 'page-post.php';
+        update_post_meta($page_id, '_wp_page_template', $post_template);
     }
 
     if( $page->post_title == 'Shop' ){

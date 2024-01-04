@@ -118,15 +118,22 @@ if ( woocommerce_product_loop() ) {?>
 			</div> 
 			<div class="col-lg-3">
 				<div class="filter-widget-area mb-50">
+					
 					<?php
 					if (class_exists('WooCommerce')) {
+						/*
 						//dynamic_sidebar('filter-widget-area');
 						// Kiểm tra xem sidebar có tồn tại hay không
 						if (is_active_sidebar('filter-widget-area')) {
 							the_widget('WC_Widget_Price_Filter', array(), array('widget_id' => 'filter-widget-area'));
 							//dynamic_sidebar('filter-widget-area');
 						}
+						*/
 					?>
+
+<?php echo do_shortcode('[widget_price_filter]'); ?>
+
+					
 				</div>
 				<div class="widget_category_filter">
 					<h2 class="widgettitle">DANH MỤC SẢN PHẨM</h2>

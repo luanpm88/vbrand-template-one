@@ -224,9 +224,7 @@
 	</div>
 	<!-- End Why Choose Us Section -->
 <?php } ?>
-
-
-
+ 
 
 <div class="container">
 	<div class="row section-heading align-items-end">
@@ -242,8 +240,8 @@
 			</div>
 		</div>
 		<div class="col-md-4 text-md-end pt-4 pt-md-0">
-			<a class="btn btn-dark ls-2 text-uppercase" href="<?=link_shop_page()?>">
-				<span>CÁC DỰ ÁN</span>
+			<a class="btn btn-dark ls-2 text-uppercase" href="#">
+				<span>Xem sản phẩm</span>
 				<i class="bi-arrow-right btn-icon"></i>
 			</a>
 		</div>
