@@ -20,8 +20,6 @@ defined( 'ABSPATH' ) || exit;
 get_header( 'shop' );
 ?>
 
-
-
 <div class="container">
         <div class="row">  
 			<div class="col-lg-12"> 
