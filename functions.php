@@ -154,10 +154,10 @@ function custom_variation_price ($price, $variation, $product) {
     }
 }
 
-//--------- ajax 
+/**
+ * ajax function
+ */
 
- 
-	
 add_action( 'wp_ajax_productbycat', 'productbycat_init' );
 add_action( 'wp_ajax_nopriv_productbycat', 'productbycat_init' );
 function productbycat_init() { 
@@ -190,7 +190,6 @@ function productbycat_init() {
     }
     die();  //---- bắt buộc phải có khi kết thúc
 }
-
 
 
 /**
@@ -306,7 +305,117 @@ function theme_breadcrumbs() {
 }
 
 // Add the breadcrumbs to your theme by calling this function where you want them to appear 
-?>
+
+function theme_register_sidebar() {
+    register_sidebar(array(
+        'name'          => __('Product Archive Sidebar', 'your-theme-textdomain'),
+        'id'            => 'product-archive-sidebar',
+        'description'   => __('Widgets in this area will be shown on the product archive page.', 'your-theme-textdomain'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ));
+}
+add_action('widgets_init', 'theme_register_sidebar');
 
 
  
+
+/**
+ * Show checkbox listing caegory
+ */
+
+// Hàm thay đổi câu lệnh query để lọc sản phẩm theo danh mục
+function custom_shop_page_query($query) {
+    if (is_shop() && $query->is_main_query()) {
+        // Kiểm tra xem có thể lọc theo danh mục hay không
+        if (isset($_GET['productcategories']) && !empty($_GET['productcategories'])) {
+            $category_slugs = explode(',', $_GET['productcategories']);
+
+            // Thêm điều kiện lọc theo danh mục vào câu lệnh query
+            $tax_query = array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'slug',
+                    'terms'    => $category_slugs,
+                    'operator' => 'IN',
+                ),
+            );
+
+            $query->set('tax_query', $tax_query);
+        }
+    }
+}
+
+// Hook để thực hiện thay đổi câu lệnh query trước khi thực hiện truy vấn
+add_action('pre_get_posts', 'custom_shop_page_query');
+
+
+
+
+function display_product_categories_checkbox() {
+    // Get product categories
+    $product_categories = get_terms(array(
+        'taxonomy'   => 'product_cat',
+        'hide_empty' => false,
+    ));
+
+    // Start the output buffer
+    ob_start(); 
+
+    $in_categories = [];
+
+    if(isset($_GET['productcategories'])){
+        $in_categories = explode( ',',  $_GET['productcategories'] );
+    }
+    // Display a checkbox for each category
+    foreach ($product_categories as $category) {
+        echo '<input type="checkbox" name="product_categorie[]" value="' . esc_attr($category->slug) . '" id="' . esc_attr($category->slug) . '"';
+        // Check if the category is selected
+        if ( in_array($category->slug, $in_categories) ) {
+            echo ' checked';
+        }   
+        echo '>';
+        echo '<label for="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</label><br>';
+    }
+     
+
+    echo '<input type="hidden" name="productcategories" value=""  id="productcategories" >'; 
+
+    // Return the buffered output
+    return ob_get_clean();
+}
+
+// Shortcode for displaying product category filter
+function product_category_filter_shortcode() {
+    return display_product_categories_checkbox();
+}
+
+// Register the shortcode
+add_shortcode('product_category_filter', 'product_category_filter_shortcode');
+
+// Function to modify the product query based on selected categories
+function filter_products_by_category($query) {
+    if (isset($_GET['product_categories']) && is_array($_GET['product_categories'])) {
+        $selected_categories = implode(',', $_GET['product_categories']); // Combine categories into a single variable
+
+        $tax_query = array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field'    => 'slug',
+                'terms'    => explode(',', $selected_categories), // Split the combined categories back into an array
+                'operator' => 'IN',
+            ),
+        );
+
+        $query->set('tax_query', $tax_query);
+    }
+}
+
+// Hook to filter products based on selected categories
+add_action('woocommerce_product_query', 'filter_products_by_category');
+
+
+
+?>

@@ -45,8 +45,9 @@
 			?>
 		</div>
 		<div class="col col-md-4">
+			
+			<form id="product-filter-form" method="get"></form>
 
-			<form id="product-filter-form" method="post">
 				<ul id="category-list">
 					<?php
 					$product_categories = get_terms(array(
@@ -55,13 +56,13 @@
 					));
 
 					foreach ($product_categories as $category) {
-						echo '<li><input type="checkbox" name="selected_categories[]" value="' . esc_attr($category->term_id) . '"> ' . esc_html($category->name) . '</li>';
+						echo '<li><input type="checkbox" name="selected_categories" value="' . esc_attr($category->term_id) . '"> ' . esc_html($category->name) . '</li>';
 					}
 					?>
 				</ul>
-				<input type="submit" value="Filter">
-			</form>
-			
+				<button class="btn btn-secondary">
+					Lọc
+				</button>
 		</div>
 	</div>
 </div>
@@ -69,7 +70,7 @@
  
 <script>
 	var selectedCategories = [];
-	
+	/*
 	// Xử lý sự kiện khi checkbox được click
 	$('#category-list input[type="checkbox"]').on('click', function () { 
 		$('#category-list input[type="checkbox"]:checked').each(function () {
@@ -93,6 +94,7 @@
 			}
 		});
 	});
+	*/
  
 </script>
 <?php
