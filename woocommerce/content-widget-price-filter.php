@@ -18,9 +18,10 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
+ 
 <?php do_action( 'woocommerce_widget_price_filter_start', $args ); ?>
+ 
 
-<form method="get" action="<?php echo esc_url( $form_action ); ?>" onsubmit="combineCategories()">
 	<div class="price_slider_wrapper">
 		<div class="price_slider" style="display:none;"></div>
 		<div class="price_slider_amount" data-step="<?php echo esc_attr( $step ); ?>">
@@ -36,56 +37,6 @@ defined( 'ABSPATH' ) || exit;
 			<?php echo wc_query_string_form_fields( null, array( 'min_price', 'max_price', 'paged' ), '', true ); ?>
 			<div class="clear"></div>
 		</div>
-	</div>
-
-	<div class="widget_category_filter">
-		<h2 class="widgettitle">DANH MỤC SẢN PHẨM</h2>
-		<?php
-			$product_categories = get_terms(array(
-				'taxonomy'   => 'product_cat',
-				'hide_empty' => false,
-			)); 
-			$in_categories = [];
-
-			 if(isset($_GET['productcategories'])){
-				$in_categories = explode( ',',  $_GET['productcategories'] );
-			}
-			// Display a checkbox for each category
-			foreach ($product_categories as $category) {
-				echo '<input type="checkbox" name="product_categorie[]" value="' . esc_attr($category->slug) . '" id="' . esc_attr($category->slug) . '"';
-				// Check if the category is selected
-				if ( in_array($category->slug, $in_categories) ) {
-					echo ' checked';
-				}   
-				echo '>';
-				echo '<label for="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</label><br>';
-			} 
-			echo '<input type="hidden" name="productcategories" value="'. ( isset($_GET['productcategories'])?  $_GET['productcategories'] : '' ).'"  id="productcategories" >'; 
-		?>
-	</div>
-
-
- 
-
-	<button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>"><?php echo esc_html__( 'Filter', 'woocommerce' ); ?></button>
-	
-	<script>
-	function combineCategories() { 
-
-		var checkboxes = document.getElementsByName('product_categorie[]');
-		var combinedCategories = [];
-
-		checkboxes.forEach(function(checkbox) {
-			if (checkbox.checked) {
-				combinedCategories.push(checkbox.value);
-			}
-		});
-		document.getElementById('productcategories').value = combinedCategories.join(',');  
-		//var catform = document.querySelector('form[name="catfilter"]');
-		//catform.submit(); 
-	}
-	</script>
- 
-</form>
+	</div> 
 
 <?php do_action( 'woocommerce_widget_price_filter_end', $args ); ?>

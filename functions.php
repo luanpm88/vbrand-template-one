@@ -370,18 +370,19 @@ function display_product_categories_checkbox() {
         $in_categories = explode( ',',  $_GET['productcategories'] );
     }
     // Display a checkbox for each category
+    echo '<ul class="categories">';
     foreach ($product_categories as $category) {
+        echo "<li>";
         echo '<input type="checkbox" name="product_categorie[]" value="' . esc_attr($category->slug) . '" id="' . esc_attr($category->slug) . '"';
         // Check if the category is selected
         if ( in_array($category->slug, $in_categories) ) {
             echo ' checked';
         }   
         echo '>';
-        echo '<label for="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</label><br>';
+        echo '<label class="ml-2" for="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</label>';
+        echo "</li>";
     }
-     
-
-    echo '<input type="hidden" name="productcategories" value=""  id="productcategories" >'; 
+    echo "</ul>";
 
     // Return the buffered output
     return ob_get_clean();

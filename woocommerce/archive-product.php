@@ -111,18 +111,28 @@ if ( woocommerce_product_loop() ) {?>
 	do_action( 'woocommerce_no_products_found' );
 }
 
-
 ?>
 			</div> 
 			<div class="col-lg-3">
-				<div class="filter-widget-area mb-50">  
-					<?php
-					if (class_exists('WooCommerce')) {
-						the_widget('WC_Widget_Price_Filter'); 
-					}
-					?>
+				<div class="filter-widget-area mb-50"> 
+					<div class="widget_category_filter">
+						<h2 class="widgettitle">DANH MỤC SẢN PHẨM</h2>
+						<?php echo do_shortcode('[product_category_filter]'); ?> 
+						</div>
+						<div class="widget_price_filter">
+						<form method="get" name="formfilter" id="formfilter" action="<?php echo home_url( trailingslashit( $wp->request ) );?>">
+							<input type="hidden" name="productcategories" value="<?php echo isset( $_GET['productcategories'] )? $_GET['productcategories'] : ''; ?>"  id="productcategories" >
+							<?php
+								if (class_exists('WooCommerce')) {
+									the_widget('WC_Widget_Price_Filter');
+								}
+							?>
+							<button type="button" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" onclick="combineCategories()"><?php echo esc_html__( 'Filter', 'woocommerce' ); ?></button>
+						</form> 
+					</div>
 				</div>
 				<div class="widget_category_filter"> 
+
 					<?php 
 					/**
 					 * Hook: woocommerce_sidebar.
@@ -143,4 +153,26 @@ if ( woocommerce_product_loop() ) {?>
  * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
  */
 do_action( 'woocommerce_after_main_content' ); ?>
+<script>
+function combineCategories() { 
+
+	var checkboxes = document.getElementsByName('product_categorie[]');
+	var combinedCategories = [];
+
+	checkboxes.forEach(function(checkbox) {
+		if (checkbox.checked) {
+			combinedCategories.push(checkbox.value);
+		}
+	});
+
+	var elements = document.getElementsByName("productcategories");
+ 
+	for (var i = 0; i < elements.length; i++) {
+		elements[i].value = combinedCategories.join(',');
+	}
+	//document.getElementById('productcategories').value = combinedCategories.join(',');  
+	var catform = document.getElementById('formfilter');
+	catform.submit(); 
+}
+</script>
 <?php get_footer( 'shop' );?>

@@ -125,7 +125,7 @@
 									<?php if (wp_get_attachment_image_src(get_the_ID())) { ?>
 										<?php the_post_thumbnail('single-post-thumbnail', array('class' => 'img-fluid product-thumbnail')); ?>
 									<?php } else { ?>
-										<img src="<?=get_template_directory_uri()?>/images/empty_box.png" class="img-fluid product-thumbnail">
+										<img src="<?=get_template_directory_uri()?>/images/empty.png" class="img-fluid product-thumbnail">
 									<?php } ?>
 									
 									<h3 class="product-title"><?=the_title()?></h3>
@@ -470,11 +470,8 @@
 
 						</a>
 						<div class="post-content-entry">
-							<h3><?=get_the_title()?></h3> 
-							<p><?=$shortDescription?></p>
-							<div class="meta">
-								<span>by <a href="#"><?=the_author()?></a></span> <span>on <a href="#"><?=get_the_date()?></a></span>
-							</div>
+							<h3><a href="<?=get_permalink()?>"><?=get_the_title()?></a></h3> 
+							<div class="post-alias"><a href="<?=get_permalink()?>"><?=the_excerpt()?></a></div>
 						</div>
 					</div>
 				</div>

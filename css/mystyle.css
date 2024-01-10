@@ -243,3 +243,34 @@ h2.section-title{
 .woocommerce ul.products li.product .button{
     padding:9px 4px;
 }
+/*
+    widget_category_filter
+*/
+.widget_category_filter{
+    margin-bottom: 25px;
+}
+.widget_category_filter h2.widgettitle{ 
+    padding: 7px;
+    background-color: #dfdfdf;
+}
+.widget_category_filter ul.categories{
+    margin: 0;
+    padding: 0;
+}
+.widget_category_filter ul.categories li{
+    list-style-type: none;
+}
+.widget_category_filter ul.categories li label.ml-2{
+    padding-left: 12px;
+}
+/*
+    widget_price_filter
+*/
+.widget_price_filter{
+
+}
+.widget_price_filter h2.widgettitle{ 
+    padding: 7px;
+    background-color: #dfdfdf;
+    margin-bottom: 25px;
+}
