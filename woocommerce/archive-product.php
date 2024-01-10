@@ -170,7 +170,9 @@ function combineCategories() {
 	for (var i = 0; i < elements.length; i++) {
 		elements[i].value = combinedCategories.join(',');
 	}
-	//document.getElementById('productcategories').value = combinedCategories.join(',');  
+
+	//document.getElementById('productcategories').value = combinedCategories.join(',');
+	
 	var catform = document.getElementById('formfilter');
 	catform.submit(); 
 }
