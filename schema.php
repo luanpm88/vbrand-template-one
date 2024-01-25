@@ -82,7 +82,7 @@ return [
                 'options' => [
                     ['value' => 'page-homepage.php', 'text' => 'Home'],
                     ['value' => 'page-aboutus.php', 'text' => 'About Us'],
-                    ['value' => '', 'text' => 'Shop'],
+                    ['value' => 'shop', 'text' => 'Shop'],
                     ['value' => 'page-news.php', 'text' => 'News'],
                     ['value' => 'page-contact', 'text' => 'Contact Us'],
                 ],

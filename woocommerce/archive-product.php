@@ -64,7 +64,7 @@ get_header( 'shop' );
 			 
 <?php
 if ( woocommerce_product_loop() ) {?>
-<div class="my-4">
+<div class="mb-4">
 <?php
 	/**
 	 * Hook: woocommerce_before_shop_loop.
