@@ -46,28 +46,28 @@ return [
             'default' => [
                 [
                     'show' => true,
-                    'title' => 'Home',
+                    'title' => 'Trang chủ',
                     'type' => 'page-homepage.php',
                 ],
                 [
                     'show' => true,
-                    'title' => 'About Us',
+                    'title' => 'Về chúng tôi',
                     'type' => 'page-aboutus.php',
                 ],
 
                 [
                     'show' => true,
-                    'title' => 'Shop',
+                    'title' => 'Gian hàng',
                     'type' => 'shop',
                 ],
                 [
                     'show' => true,
-                    'title' => 'News',
+                    'title' => 'Tin tức',
                     'type' => 'page-news.php',
                 ],
                 [
                     'show' => true,
-                    'title' => 'Contact Us',
+                    'title' => 'Liên hệ',
                     'type' => 'page-contact.php',
                 ],
 
