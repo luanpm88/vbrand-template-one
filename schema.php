@@ -11,8 +11,8 @@
 
 return [
     'sessions' => [
-        ['name' => 'general', 'title' => 'Thông tin chung'],
-        ['name' => 'menu', 'title' => 'Thanh điều hướng'],
+        ['name' => 'general', 'title' => 'Tổng quan'],
+        ['name' => 'menu', 'title' => 'Menus'],
         ['name' => 'home', 'title' => 'Trang chủ'],
         ['name' => 'about-us', 'title' => 'Về chúng tôi'],
     ],
@@ -412,21 +412,7 @@ return [
             'label' => 'Footer Logo',
             'default' => get_template_directory_uri() . '/images/sofa.png',
         ],
-        // FOOTER
-        [
-            'session' => 'general',
-            'type' => 'boolean',
-            'name' => 'about_us_show',
-            'label' => 'Show About Us Module',
-            'default' => true,
-        ],
-        [
-            'session' => 'general',
-            'type' => 'text',
-            'name' => 'aboutus_title',
-            'label' => 'About Us title',
-            'default' => 'Giới thiệu',
-        ],
+        
         // FOOTER LOGO
         [
             'session' => 'general',
@@ -434,6 +420,22 @@ return [
             'name' => 'aboutus_image',
             'label' => 'Image About Us',
             'default' => get_template_directory_uri() . '/images/why-choose-us-img.jpg',
+        ],
+
+        // ABOUT US
+        [
+            'session' => 'about-us',
+            'type' => 'boolean',
+            'name' => 'about_us_show',
+            'label' => 'Show About Us Module',
+            'default' => true,
+        ],
+        [
+            'session' => 'about-us',
+            'type' => 'text',
+            'name' => 'aboutus_title',
+            'label' => 'About Us title',
+            'default' => 'Giới thiệu',
         ],
         [
             'session' => 'about-us',

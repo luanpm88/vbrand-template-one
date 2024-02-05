@@ -8,11 +8,9 @@
 ?>
 <?php
     $themeData = vbrand_load_theme_data();
-?>  
+?>
 
-
-
-<?php if ($themeData->get('about_us_show')) { ?>
+<?php if ($themeData->get('about_us_show') == 'true') { ?>
 	<!-- Start Why Choose Us Section -->
 	<div class="why-choose-section" id="about-us">
 		<div class="container"> 
