@@ -173,7 +173,7 @@
 		<div class="container">
 			<div class="row justify-content-between">
 				<div class="col-lg-6">
-					<h2 class="section-title">
+					<h2 class="section-title display-8">
 						<?php echo $themeData->get('why_us_module_title');?>
 					</h2>
 					<p>
@@ -245,7 +245,7 @@
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-6">
-					<h2 class="display-5 fw-700 lh-1 m-0 text-dark"><?php echo $themeData->get('our_project_module_alias');?></h2>
+					<h2 class="display-8 fw-700 lh-1 m-0 text-dark"><?php echo $themeData->get('our_project_module_alias');?></h2>
 				</div>
 				<div class="col-md-6 pt-3 pt-md-0">
 					<p class="m-0"><?php echo $themeData->get('our_project_module_description');?></p>
