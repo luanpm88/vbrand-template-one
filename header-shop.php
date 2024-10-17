@@ -30,7 +30,7 @@
                     <?php if ($themeData->get('site_logo')) { ?>
                         <img src="<?php echo $themeData->get('site_logo'); ?>" width="150" alt="">
                     <?php } else { ?>
-                        Woo vBrand<span>.</span>
+                        Funiture Luxury<span>.</span>
                     <?php } ?>
 
                    

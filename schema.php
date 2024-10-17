@@ -115,14 +115,14 @@ return [
             'type' => 'textarea',
             'name' => 'banner_title',
             'label' => 'Banner Title',
-            'default' => 'Modern Interior <span clsas="d-block">Design Studio</span>',
+            'default' => 'Thiết kế nội thất<span clsas="d-block">hiện đại</span>',
         ],
         [
             'session' => 'home',
             'type' => 'textarea',
             'name' => 'banner_description',
             'label' => 'Banner Description',
-            'default' => 'Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.',
+            'default' => 'Thiết kế nội thất hiện đại kết hợp sự tiện nghi và thẩm mỹ, tập trung vào sự đơn giản, linh hoạt và sử dụng tối đa ánh sáng tự nhiên. Vật liệu công nghệ cao như kính, thép không gỉ được ưa chuộng, tạo không gian mở rộng và hiện đại. Màu sắc trung tính kết hợp với điểm nhấn màu sắc táo bạo, đèn led và ánh sáng mềm mại tạo điểm nhấn và sự ấm áp cho không gian. Thiết kế này không chỉ tiện nghi mà còn thể hiện phong cách và cá nhân của gia chủ.',
         ],
         [
             'session' => 'home',
@@ -136,7 +136,7 @@ return [
             'type' => 'text',
             'name' => 'banner_main_button_text',
             'label' => 'Banner Main Button Text',
-            'default' => 'Shop Now',
+            'default' => 'Xem ngay',
         ],
         [
             'session' => 'home',
